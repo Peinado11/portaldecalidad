@@ -2,6 +2,27 @@
 
 Sistema web intuitivo para el entrenamiento de nuevos empleados mediante videos de YouTube, con seguimiento de progreso y gestión de exámenes.
 
+---
+
+## 🚀 INICIO RÁPIDO
+
+### ¿Primera vez usando esta aplicación?
+
+**📖 Guías paso a paso (explicadas muy fácilmente):**
+
+1. **[⚡ INICIO RÁPIDO](INICIO_RAPIDO.md)** - Empieza aquí (5 minutos)
+2. **[💻 Guía Local Completa](GUIA_LOCAL.md)** - Cómo probar en tu computadora (explicado para principiantes)
+3. **[🌐 Guía de Despliegue](GUIA_HOSTGATOR.md)** - Cómo ponerlo en internet (HostGator, Railway, Render)
+
+### Comandos rápidos para usuarios experimentados:
+```bash
+npm install    # Instalar dependencias
+npm start      # Iniciar servidor
+```
+Luego abre: `http://localhost:3000` | Login: `admin` / `admin1`
+
+---
+
 ## Características
 
 - **Panel de Administración**: Gestión completa de videos y empleados
