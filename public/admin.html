@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Portal de Entrenamiento</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Portal de Entrenamiento - Admin</div>
+            <div class="user-info">
+                <span class="user-name" id="user-name"></span>
+                <button class="btn btn-sm btn-outline" onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="alert-container"></div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('videos')">Videos de Entrenamiento</button>
+            <button class="tab" onclick="switchTab('employees')">Empleados</button>
+            <button class="tab" onclick="switchTab('stats')">Estadísticas</button>
+        </div>
+
+        <!-- Tab: Videos -->
+        <div id="videos-tab" class="tab-content active">
+            <div class="card">
+                <div class="flex justify-between align-center mb-4">
+                    <h2>Videos de Entrenamiento</h2>
+                    <button class="btn btn-primary" onclick="showAddVideoModal()">
+                        + Agregar Video
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Orden</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="videos-table-body">
+                            <tr>
+                                <td colspan="4" class="text-center">Cargando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Empleados -->
+        <div id="employees-tab" class="tab-content">
+            <div class="card">
+                <div class="flex justify-between align-center mb-4">
+                    <h2>Empleados</h2>
+                    <button class="btn btn-primary" onclick="showAddEmployeeModal()">
+                        + Agregar Empleado
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Puesto</th>
+                                <th>Usuario</th>
+                                <th>Fecha de Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employees-table-body">
+                            <tr>
+                                <td colspan="5" class="text-center">Cargando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Estadísticas -->
+        <div id="stats-tab" class="tab-content">
+            <div class="card">
+                <h2 class="mb-4">Progreso de Empleados</h2>
+                <div id="stats-container">
+                    <p class="text-center">Cargando estadísticas...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Agregar/Editar Video -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="video-modal-title">Agregar Video</h3>
+                <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="video-form">
+                    <input type="hidden" id="video-id">
+
+                    <div class="form-group">
+                        <label class="form-label" for="video-nombre">Nombre del Video *</label>
+                        <input type="text" id="video-nombre" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="video-descripcion">Descripción</label>
+                        <textarea id="video-descripcion" class="form-textarea"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="video-url">URL del Video de YouTube *</label>
+                        <input type="url" id="video-url" class="form-input" placeholder="https://www.youtube.com/watch?v=..." required>
+                        <small style="color: var(--text-secondary); font-size: 12px;">
+                            Ejemplo: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="video-pdf">URL del PDF</label>
+                        <input type="url" id="video-pdf" class="form-input" placeholder="https://ejemplo.com/documento.pdf">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="video-examen">URL del Examen</label>
+                        <input type="url" id="video-examen" class="form-input" placeholder="https://forms.google.com/...">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="video-orden">Orden</label>
+                        <input type="number" id="video-orden" class="form-input" min="1" value="1">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeVideoModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveVideo()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Agregar Empleado -->
+    <div id="employee-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Agregar Empleado</h3>
+                <button class="modal-close" onclick="closeEmployeeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="employee-form">
+                    <div class="form-group">
+                        <label class="form-label" for="emp-nombre">Nombre Completo *</label>
+                        <input type="text" id="emp-nombre" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="emp-puesto">Puesto *</label>
+                        <input type="text" id="emp-puesto" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="emp-usuario">Usuario (Correo) *</label>
+                        <input type="email" id="emp-usuario" class="form-input" placeholder="empleado@empresa.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="emp-password">Contraseña (RFC) *</label>
+                        <input type="text" id="emp-password" class="form-input" placeholder="ABCD123456XYZ" required>
+                        <small style="color: var(--text-secondary); font-size: 12px;">
+                            Se recomienda usar el RFC del empleado como contraseña
+                        </small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeEmployeeModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveEmployee()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

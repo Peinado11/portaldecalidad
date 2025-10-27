@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Entrenamiento - Portal de Onboarding</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Mi Entrenamiento</div>
+            <div class="user-info">
+                <span class="user-name" id="user-name"></span>
+                <button class="btn btn-sm btn-outline" onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="alert-container"></div>
+
+        <!-- Estadísticas de Progreso -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="total-videos">0</div>
+                <div class="stat-label">Total de Videos</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #10B981, #059669);">
+                <div class="stat-value" id="completed-videos">0</div>
+                <div class="stat-label">Videos Completados</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
+                <div class="stat-value" id="completed-exams">0</div>
+                <div class="stat-label">Examenes Completados</div>
+            </div>
+        </div>
+
+        <!-- Barra de Progreso General -->
+        <div class="card">
+            <h3>Progreso General</h3>
+            <div class="progress-bar" style="height: 24px; margin-top: 16px;">
+                <div class="progress-fill" id="general-progress" style="width: 0%"></div>
+            </div>
+            <p class="text-center mt-4" style="font-size: 18px; font-weight: 600;">
+                <span id="progress-percentage">0</span>% Completado
+            </p>
+        </div>
+
+        <!-- Videos de Entrenamiento -->
+        <div class="card">
+            <h2 class="mb-4">Videos de Entrenamiento</h2>
+            <div id="videos-container" class="video-grid">
+                <p class="text-center">Cargando videos...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Ver Video -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-video-title">Video</h3>
+                <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="video-player" id="video-player">
+                    <!-- El video se cargará aquí -->
+                </div>
+
+                <div>
+                    <h4 id="modal-video-name" style="margin-bottom: 12px;"></h4>
+                    <p id="modal-video-description" style="color: var(--text-secondary);"></p>
+                </div>
+
+                <div class="video-actions" id="video-actions">
+                    <!-- Los botones se cargarán aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/employee.js"></script>
+</body>
+</html>
